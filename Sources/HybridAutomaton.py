@@ -50,10 +50,18 @@ def define_event_set(automate, events):
 def set_initial_state(automate, q0, x0): 
     """Sets the initial discrete and continuous states"""
     if q0 not in automate["Q"]:
-        raise ValueError(f"L’état discret initial '{q0}' n’existe pas.")
+        raise ValueError(f"The initial state '{q0}' does not exist.")
     if len(x0) != len(automate["X"]):
-        raise ValueError("x0 doit avoir la même dimension que X.")
+        raise ValueError("x0 must have the same dimension as X.")
     automate["q0"] = q0
     automate["x0"] = x0[:]
     automate["q"] = q0
     automate["x"] = x0[:]
+    
+def set_flow(automate, q_name, dynamique):
+    """Sets the flow function for a given state q in Q"""
+    if q_name not in automate["Q"]:
+        raise ValueError(f"The discreate state '{q_name}' does not exist.")
+    automate["flow"][q_name] = dynamique
+    
+    
