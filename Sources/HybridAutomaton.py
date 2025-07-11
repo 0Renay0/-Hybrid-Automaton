@@ -99,3 +99,20 @@ def set_event(automate, q_from, q_to, event_name):
         automate["Event"][q_from] = {}
     automate["Event"][q_from][q_to] = event_name
     
+def add_transition(automate, q_from, q_to, event=None, guard=None, reset=None): 
+    """
+    Adds a transition to the automaton with optional guard and reset.
+    Parameters:
+        q_from (str): Origin state.
+        q_to (str): Destination state.
+        event (str): Event label.
+        guard (str): Guard function name.
+        reset (str): Reset function name.
+    """
+    automate["T"].append({
+        "q_from": q_from,
+        "q_to": q_to,
+        "event": event,
+        "guard": guard,
+        "reset": reset
+    })
