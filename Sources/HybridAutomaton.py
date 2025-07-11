@@ -86,3 +86,16 @@ def set_jump(automate, q_from, q_to, reset_func):
     if q_from not in automate["Jump"]:
         automate["Jump"][q_from] = {}
     automate["Jump"][q_from][q_to] = reset_func
+    
+def set_event(automate, q_from, q_to, event_name):
+    """
+    Sets the event associated with a transition from q_from to q_to.
+    """
+    if q_from not in automate["Q"] or q_to not in automate["Q"]:
+        raise ValueError(f"The Couple ({q_from}, {q_to}) is not valid in Q × Q.")
+    if "Event" not in automate:
+        automate["Event"] = {}  # Creation of the Event dictionary if it does not exist
+    if q_from not in automate["Event"]:
+        automate["Event"][q_from] = {}
+    automate["Event"][q_from][q_to] = event_name
+    
