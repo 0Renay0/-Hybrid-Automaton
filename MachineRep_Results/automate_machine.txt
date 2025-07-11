@@ -1,0 +1,87 @@
+{
+    "Q": [
+        "Q1",
+        "Q2",
+        "Q3"
+    ],
+    "X": [
+        "x",
+        "tau"
+    ],
+    "U": [],
+    "E": {
+        "alpha": false,
+        "beta": false,
+        "gamma": false
+    },
+    "q0": "Q1",
+    "x0": [
+        0.0,
+        0.0
+    ],
+    "flow": {
+        "Q1": "flow_Q1",
+        "Q2": "flow_Q2",
+        "Q3": "flow_Q3"
+    },
+    "Inv": {
+        "Q1": "inv_Q1",
+        "Q2": "inv_Q2",
+        "Q3": "inv_Q3"
+    },
+    "Guard": {
+        "Q1": {
+            "Q2": null
+        },
+        "Q2": {
+            "Q1": "guard_Q2_Q1",
+            "Q3": "guard_Q2_Q3"
+        },
+        "Q3": {
+            "Q1": null
+        }
+    },
+    "Jump": {
+        "Q1": {
+            "Q2": "identity"
+        },
+        "Q2": {
+            "Q1": "reset_all",
+            "Q3": "reset_all"
+        },
+        "Q3": {
+            "Q1": "identity"
+        }
+    },
+    "T": [
+        {
+            "q_from": "Q1",
+            "q_to": "Q2",
+            "event": "alpha",
+            "guard": null,
+            "reset": "identity"
+        },
+        {
+            "q_from": "Q2",
+            "q_to": "Q1",
+            "event": "beta",
+            "guard": "guard_Q2_Q1",
+            "reset": "reset_all"
+        },
+        {
+            "q_from": "Q2",
+            "q_to": "Q3",
+            "event": null,
+            "guard": "guard_Q2_Q3",
+            "reset": "reset_all"
+        },
+        {
+            "q_from": "Q3",
+            "q_to": "Q1",
+            "event": "gamma",
+            "guard": null,
+            "reset": "identity"
+        }
+    ],
+    "functions": {}
+}

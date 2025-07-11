@@ -131,5 +131,5 @@ def visualiser_automate(A, filename="Hybrid_Automato", functions=None):
         dot.edge(src, dst, label=label)
 
     # Graph generation 
-    dot.render("Thermostat_Results/"+filename, format="png", cleanup=True)
+    dot.render("MachineRep_Results/"+filename, format="png", cleanup=True)
     print(f"Automaton Generated : {filename}.png")
