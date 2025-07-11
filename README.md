@@ -13,5 +13,16 @@ Required packages:
 pip install graphviz matplotlib
 pip install pandas
 ```
+## Main functions
 
+### Construction of HA (`HybridAutomaton.py`)
+  - `create_automate()`  initializes a new automaton structure.
+  - Utility functions: `add_discrete_state`, `define_continuous_space`, `set_flow`, `set_guard`, `set_jump`,... are provided to build your model.
+  - `export_automate_to_txt_with_functions(...)` saves the automaton and associated Python functions as JSON for conversion into another formalsims.
 
+### Simulation (`Simulation.py`)
+  - `simulate(A, dt, t_max, event_schedule=None)` simulates the time evolution of the automaton with optional event scheduling depending on your model if it contains event or not.
+  - `plot_trace(trace, A)` plots the evolution of continuous variables and discrete states.
+
+### Visualization (`VisuelAutomate.py`)
+  - `visualiser_automate(A, filename, functions)` generates a `.png` diagram showing the representation of HA.
