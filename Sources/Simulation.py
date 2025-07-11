@@ -57,3 +57,39 @@ def simulate(A, dt=0.01, t_max=10.0, event_schedule=None):
         trace.append((t, q, x[:]))
 
     return trace
+
+
+def plot_trace(trace, A):
+    """
+    Plots the evolution of continuous and discrete states over time.
+
+    Parameters:
+        - trace (list): The trace returned by `simulate`.
+        - A (dict): The hybrid automaton structure, used to label variables.
+    """
+    times = [t for t, _, _ in trace]
+    states = [q for _, q, _ in trace]
+    state_set = sorted(set(states))
+    q_dict = {state: i for i, state in enumerate(state_set)}
+    
+    fig, axs = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
+
+    # Plot continuous variables 
+    var_names = A["X"]
+    n_vars = len(var_names)
+    for i in range(n_vars):
+        values = [x[i] for _, _, x in trace]
+        axs[0].plot(times, values, label=var_names[i])
+    axs[0].set_ylabel("Variables continues")
+    axs[0].legend()
+
+    # Plot discrete states as step transitions
+    q_vals = [q_dict[q] for q in states]
+    axs[1].step(times, q_vals, where='post')
+    axs[1].set_yticks(list(q_dict.values()))
+    axs[1].set_yticklabels(list(q_dict.keys()))
+    axs[1].set_ylabel("État discret")
+    axs[1].set_xlabel("Temps")
+
+    plt.tight_layout()
+    plt.show()
