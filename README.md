@@ -6,3 +6,16 @@ This project provides a modular framework to **model**, **simulate**, and **visu
   -  `HybridAutomaton.py` defines and builds the hybrid autoamton structure.
   -  `Simulation.py` simulate the model of HA.
   -  `VisuelAutomate.py` generates the representation and the trace of simulation of HA.
+
+## Installation 
+Required packages:
+```bash
+pip install graphviz matplotlib
+pip install pandas
+```
+Also, make sure that these packages are updated on your system:
+```bash
+# On Ubuntu
+sudo apt install Package_name
+```
+
