@@ -2,6 +2,11 @@ from graphviz import Digraph
 import re
 
 def visualiser_automate(A, filename="Hybrid_Automato", functions=None):
+    """
+    Visualise a hybrid automaton using Graphviz, including:
+        - discrete states (nodes) with continuous dynamics,
+        - transitions with guards, events, and resets.
+    """
     # Graph creation
     dot = Digraph(comment="Hybrid Automaton")
 
