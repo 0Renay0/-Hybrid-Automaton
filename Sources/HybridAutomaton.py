@@ -1,6 +1,7 @@
 import json
 import sys
 import os
+import inspect
 
 """
 Initializes the structure of a hybrid automaton.
@@ -115,6 +116,21 @@ def add_transition(automate, q_from, q_to, event=None, guard=None, reset=None):
         "reset": reset
     })
     
+    
+# --- Generic function to extract function source code ---
+def collect_functions(*funcs):
+    """
+    It builds a dictionary of function names to source code strings.
+    Only includes callable functions.
+    """
+    function_names = [f.__name__ for f in funcs if callable(f)]
+    source_map = {}
+    all_items = list(globals().items())
+    for name, func in all_items:
+        if callable(func) and name in function_names:
+            source_map[name] = inspect.getsource(func)
+    return source_map
+
 # --- Export utility ---
 
 def export_automate_to_txt_with_functions(automate, filename, functions_dict):
@@ -151,7 +167,7 @@ def export_automate_to_txt_with_functions(automate, filename, functions_dict):
         "functions": functions_dict
     }
     # Path to the directory Convert_HA_to_HtPN for conversion
-    full_path = os.path.join("../Convert_HA_to_HtPN", filename)
+    full_path = os.path.join("Thermostat_Results", filename)
     # Write the data to a JSON file
     with open(full_path, "w") as f:
         f.write(json.dumps(data, indent=4))
