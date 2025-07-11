@@ -26,3 +26,7 @@ pip install pandas
 
 ### Visualization (`VisuelAutomate.py`)
   - `visualiser_automate(A, filename, functions)` generates a `.png` diagram showing the representation of HA.
+
+
+## Author 
+Developped by **HAMADI Rayen** as part of research and academic projects involving hybrid systems.
