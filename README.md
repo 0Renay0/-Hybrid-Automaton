@@ -27,6 +27,13 @@ pip install pandas
 ### Visualization (`VisuelAutomate.py`)
   - `visualiser_automate(A, filename, functions)` generates a `.png` diagram showing the representation of HA.
 
+## Output 
+
+<p align="center">
+  <img src="Thermostat_Results/automate_hysteresis.png" alt="Example of the thermostat's HA representation " width="400"/>
+</p>
+
 
 ## Author 
 Developped by **HAMADI Rayen** as part of research and academic projects involving hybrid systems.
+
