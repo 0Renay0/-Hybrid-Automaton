@@ -157,3 +157,45 @@ def export_automate_to_txt_with_functions(automate, filename, functions_dict):
     # Write the data to a JSON file
     with open(full_path, "w") as f:
         f.write(json.dumps(data, indent=4))
+        
+
+
+# --- Generation of HtPN configuration ---
+
+def generate_config_from_automate(json_path="automate_machine.txt", output_path="Convert_HA_to_HtPN/ConfigModel.py", h_size=1):
+    """
+    Generates an initial configuration file (ConfigModel.py) for the HtPN model.
+    Defines the initial marking, initial continuous state, timer, and command inputs.
+    
+    Parameters:
+    - json_path: Path to the JSON file of the hybrid automaton.
+    - output_path: Full path to the output file to be generated.
+    - h_size: Size of the H0 vector.
+    """
+    with open(json_path, "r") as f:
+        data = json.load(f)
+
+    q0 = data.get("q0", "UNKNOWN")
+    x0 = data.get("x0", [])
+    uc0 = data.get("UC0", [0.0])
+
+    code = f'''"""
+Auto-generated configuration for HtPN model
+"""
+
+import numpy as np
+
+M0 = ["{q0}"]
+T0 = 0
+X0 = {x0}
+H0 = {[0] * h_size}
+UC0 = {uc0}
+'''
+
+    # Création du dossier si nécessaire
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+
+    with open(output_path, "w") as f:
+        f.write(code)
+
+    print(f"Configuration written to '{output_path}'")
