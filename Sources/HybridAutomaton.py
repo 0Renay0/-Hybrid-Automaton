@@ -46,3 +46,14 @@ def define_input_space(automate, inputs):
 def define_event_set(automate, events): 
     """Defines the set of observable events"""
     automate["E"] = {e: False for e in events}
+    
+def set_initial_state(automate, q0, x0): 
+    """Sets the initial discrete and continuous states"""
+    if q0 not in automate["Q"]:
+        raise ValueError(f"L’état discret initial '{q0}' n’existe pas.")
+    if len(x0) != len(automate["X"]):
+        raise ValueError("x0 doit avoir la même dimension que X.")
+    automate["q0"] = q0
+    automate["x0"] = x0[:]
+    automate["q"] = q0
+    automate["x"] = x0[:]
