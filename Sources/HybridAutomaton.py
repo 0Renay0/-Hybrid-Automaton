@@ -27,3 +27,10 @@ def create_automate():
         "Guard": {},    # Guard conditions for transitions
         "Jump": {}      # Reset (jump) functions
     }
+    
+# --- Component definitions ---
+
+def add_discrete_state(automate, q_name): 
+    """Add a discrete state to the automaton"""
+    if q_name not in automate["Q"]:
+        automate["Q"].append(q_name)
