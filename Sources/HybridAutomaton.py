@@ -70,3 +70,10 @@ def set_invariant(automate, q_name, invariant_func):
         raise ValueError(f"The discreate state '{q_name}' does not exist.")
     automate["Inv"][q_name] = invariant_func
     
+def set_guard(automate, q_from, q_to, guard_func):
+    """Sets the guard function for a transition from q_from to q_to"""
+    if q_from not in automate["Q"] or q_to not in automate["Q"]:
+        raise ValueError(f"The Couple ({q_from}, {q_to}) is not valid in Q × Q.")
+    if q_from not in automate["Guard"]:
+        automate["Guard"][q_from] = {}
+    automate["Guard"][q_from][q_to] = guard_func
