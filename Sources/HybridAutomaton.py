@@ -42,3 +42,7 @@ def define_continuous_space(automate, variable_names):
 def define_input_space(automate, inputs):
     """Defines the input space U (set of admissible inputs)"""
     automate["U"] = inputs[:]
+    
+def define_event_set(automate, events): 
+    """Defines the set of observable events"""
+    automate["E"] = {e: False for e in events}
