@@ -13,9 +13,5 @@ Required packages:
 pip install graphviz matplotlib
 pip install pandas
 ```
-Also, make sure that these packages are updated on your system:
-```bash
-# On Ubuntu
-sudo apt install Package_name
-```
+
 
