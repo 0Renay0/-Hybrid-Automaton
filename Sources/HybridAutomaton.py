@@ -167,7 +167,7 @@ def export_automate_to_txt_with_functions(automate, filename, functions_dict):
         "functions": functions_dict
     }
     # Path to the directory Convert_HA_to_HtPN for conversion
-    full_path = os.path.join("MachineRep_Results", filename)
+    full_path = os.path.join("Thermostat_Results", filename)
     # Write the data to a JSON file
     with open(full_path, "w") as f:
         f.write(json.dumps(data, indent=4))

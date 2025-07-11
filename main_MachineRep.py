@@ -3,7 +3,7 @@ sys.path.append("Sources")       # Add the parent path to access modules
 from HybridAutomaton import (create_automate, define_continuous_space,add_discrete_state, # type: ignore 
                              set_initial_state, set_flow, set_invariant,
                              set_guard, set_jump, add_transition,set_event,define_event_set,
-                             collect_functions, export_automate_to_txt_with_functions)
+                             collect_functions, export_automate_to_txt_with_functions,generate_config_from_automate)
 from Simulation import simulate, plot_trace # type: ignore
 from VisuelAutomate import visualiser_automate # type: ignore 
 import inspect
@@ -154,3 +154,4 @@ event_schedule = [
 # === Simulation ===
 trace = simulate(A, dt=0.001, t_max=20 ,event_schedule = event_schedule)
 plot_trace(trace,A)
+generate_config_from_automate(json_path="MachineRep_Results/automate_machine.txt", output_path="MachineRep_Results/ConfigModel.py", h_size=1)

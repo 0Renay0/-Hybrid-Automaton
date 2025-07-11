@@ -1,11 +1,11 @@
 import sys
 sys.path.append("Sources")       # Add the parent path to access modules
-from HybridAutomaton import (create_automate, define_continuous_space,add_discrete_state,
+from HybridAutomaton import (create_automate, define_continuous_space,add_discrete_state, # type: ignore
                              set_initial_state, set_flow, set_invariant,
                              set_guard, set_jump, add_transition,
-                             collect_functions, export_automate_to_txt_with_functions)
+                             collect_functions, export_automate_to_txt_with_functions,generate_config_from_automate)
 from Simulation import simulate, plot_trace # type: ignore
-from VisuelAutomate import visualiser_automate
+from VisuelAutomate import visualiser_automate # type: ignore
 import inspect
 
 # === Continuous Dynamics ===
@@ -99,3 +99,4 @@ visualiser_automate(A, filename="automate_hysteresis", functions=functions)
 # === Simulation ===
 trace = simulate(A, dt=0.01, t_max=5.0)
 plot_trace(trace,A)
+generate_config_from_automate(json_path="Thermostat_Results/automate_thermostat.txt", output_path="Thermostat_Results/ConfigModel.py", h_size=1)
