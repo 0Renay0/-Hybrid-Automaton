@@ -1,8 +1,6 @@
 import json
 import sys
 import os
-from graphviz import Digraph
-import matplotlib.pyplot as plt
 
 """
 Initializes the structure of a hybrid automaton.
