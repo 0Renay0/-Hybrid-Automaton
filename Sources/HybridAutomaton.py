@@ -64,4 +64,9 @@ def set_flow(automate, q_name, dynamique):
         raise ValueError(f"The discreate state '{q_name}' does not exist.")
     automate["flow"][q_name] = dynamique
     
+def set_invariant(automate, q_name, invariant_func):
+    """Sets the invariant condition for a given state q in Q"""
+    if q_name not in automate["Q"]:
+        raise ValueError(f"The discreate state '{q_name}' does not exist.")
+    automate["Inv"][q_name] = invariant_func
     
