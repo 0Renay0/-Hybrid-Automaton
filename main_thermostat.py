@@ -44,7 +44,7 @@ A = create_automate()
 define_continuous_space(A, ["x"])       # Define continuous state variables
 
 # Add discrete states 
-for q in ["Q1", "Q2", "Q4"]:
+for q in ["Q1", "Q2"]:
     add_discrete_state(A, q)
     
 set_initial_state(A, "Q1", [72.0])      # Initial state
