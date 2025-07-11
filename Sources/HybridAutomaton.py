@@ -116,3 +116,44 @@ def add_transition(automate, q_from, q_to, event=None, guard=None, reset=None):
         "guard": guard,
         "reset": reset
     })
+    
+# --- Export utility ---
+
+def export_automate_to_txt_with_functions(automate, filename, functions_dict):
+    """
+    Exports the automate and associated function source codes to a JSON-formatted .txt file.
+    Parameters:
+        automate (dict): The automaton structure.
+        filename (str): Output file name.
+        functions_dict (dict): Dictionary mapping function names to their source code.
+    """
+    def get_func_name(f):
+        return f.__name__ if callable(f) else None
+
+    data = {
+        "Q": automate["Q"],
+        "X": automate["X"],
+        "U": automate["U"],
+        "E": automate["E"],
+        "q0": automate["q0"],
+        "x0": automate["x0"],
+        "flow": {q: get_func_name(automate["flow"].get(q)) for q in automate["Q"]},
+        "Inv": {q: get_func_name(automate["Inv"].get(q)) for q in automate["Q"]},
+        "Guard": {
+            q1: {q2: get_func_name(automate["Guard"][q1][q2])
+                 for q2 in automate["Guard"][q1]}
+            for q1 in automate["Guard"]
+        },
+        "Jump": {
+            q1: {q2: get_func_name(automate["Jump"][q1][q2])
+                 for q2 in automate["Jump"][q1]}
+            for q1 in automate["Jump"]
+        },
+        "T": automate["T"],
+        "functions": functions_dict
+    }
+    # Path to the directory Convert_HA_to_HtPN for conversion
+    full_path = os.path.join("../Convert_HA_to_HtPN", filename)
+    # Write the data to a JSON file
+    with open(full_path, "w") as f:
+        f.write(json.dumps(data, indent=4))
