@@ -34,3 +34,7 @@ def add_discrete_state(automate, q_name):
     """Add a discrete state to the automaton"""
     if q_name not in automate["Q"]:
         automate["Q"].append(q_name)
+        
+def define_continuous_space(automate, variable_names):
+    """Defines the names of the continuous variables"""
+    automate["X"] = variable_names[:]
