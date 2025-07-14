@@ -42,7 +42,35 @@ Simulation of this hybrid system:
 </p>
 
 # Json Structure for the conversion of the HA to HtPN
- <pre> ```json { "Q": ["Q1", "Q2"], "X": ["x"], "q0": "Q1", "x0": [72.0] } ``` </pre> 
+{
+  "Q": ["Q1", "Q2"],
+  "X": ["x", "tau"],
+  "q0": "Q1",
+  "x0": [72.0, 0.0],
+  "U": [0.0, 1.0],
+  "flow": {
+    "Q1": "flow_Q1",
+    "Q2": "flow_Q2"
+  },
+  "E": ["e12", "e21"],
+  "guards": {
+    "e12": "guard_Q1_Q2",
+    "e21": "guard_Q2_Q1"
+  },
+  "reset": {
+    "e12": [72.0, 0.0],
+    "e21": [68.0, 0.0]
+  },
+  "delta": {
+    "Q1": {
+      "e12": "Q2"
+    },
+    "Q2": {
+      "e21": "Q1"
+    }
+  }
+}
+
 
 ## Author 
 Developped by **HAMADI Rayen** as part of research and academic projects involving hybrid systems.
