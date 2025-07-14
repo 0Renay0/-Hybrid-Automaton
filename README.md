@@ -28,17 +28,21 @@ pip install pandas
   - `visualiser_automate(A, filename, functions)` generates a `.png` diagram showing the representation of HA.
 
 ## Output 
-Example of the thermostat's HA representation:
+
+# HA representation
+Hybrid automata describing a thermostat:
 <p align="center">
   <img src="Thermostat_Results/automate_hysteresis.png" alt="Example of the thermostat's HA representation " width="400"/>
 </p>
 
-Example of the simulation of the thermostat:
+# HA Simulation
+Simulation of this hybrid system:
 <p align="center">
   <img src="Thermostat_Results/SimulationThermostat.png" alt="Example of the thermostat's HA simulation " width="400"/>
 </p>
 
-
+# Json Structure for the conversion of the HA to HtPN
+ <pre> ```json { "Q": ["Q1", "Q2"], "X": ["x"], "q0": "Q1", "x0": [72.0] } ``` </pre> 
 
 ## Author 
 Developped by **HAMADI Rayen** as part of research and academic projects involving hybrid systems.
