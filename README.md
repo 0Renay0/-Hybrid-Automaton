@@ -42,17 +42,74 @@ Simulation of this hybrid system:
 </p>
 
 # Json Structure for the conversion of the HA to HtPN
+```json
+
 {
-  "Q": ["Q1", "Q2"],
-  "X": ["x", "tau"],
-  "q0": "Q1",
-  "x0": [72.0, 0.0],
-  "U": [0.0, 1.0],
-  "flow": {
-    "Q1": "flow_Q1",
-    "Q2": "flow_Q2"
-  }
+    "Q": [
+        "Q1",
+        "Q2"
+    ],
+    "X": [
+        "x"
+    ],
+    "U": [],
+    "E": {},
+    "q0": "Q1",
+    "x0": [
+        72.0
+    ],
+    "flow": {
+        "Q1": "flow_Q1",
+        "Q2": "flow_Q2"
+    },
+    "Inv": {
+        "Q1": "inv_Q1",
+        "Q2": "inv_Q2"
+    },
+    "Guard": {
+        "Q1": {
+            "Q2": "guard_Q1_Q2"
+        },
+        "Q2": {
+            "Q1": "guard_Q2_Q1"
+        }
+    },
+    "Jump": {
+        "Q1": {
+            "Q2": "reset_none"
+        },
+        "Q2": {
+            "Q1": "reset_none"
+        }
+    },
+    "T": [
+        {
+            "q_from": "Q1",
+            "q_to": "Q2",
+            "event": null,
+            "guard": "guard_Q1_Q2",
+            "reset": "reset_none"
+        },
+        {
+            "q_from": "Q2",
+            "q_to": "Q1",
+            "event": null,
+            "guard": "guard_Q2_Q1",
+            "reset": "reset_none"
+        }
+    ],
+    "functions": {
+        "flow_Q1": "def flow_Q1(x, t):\n    return [-x[0] + 50]\n",
+        "flow_Q2": "def flow_Q2(x, t):\n    return [-x[0] + 80]\n",
+        "inv_Q1": "def inv_Q1(x):\n    return True\n",
+        "inv_Q2": "def inv_Q2(x):\n    return True\n",
+        "guard_Q1_Q2": "def guard_Q1_Q2(x):\n    return x[0] <= 70\n",
+        "guard_Q2_Q1": "def guard_Q2_Q1(x):\n    return x[0] >= 75\n",
+        "reset_none": "def reset_none(x):\n    return x[:]\n"
+    }
 }
+
+```
 
 
 ## Author 
