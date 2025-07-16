@@ -42,6 +42,7 @@ Simulation of this hybrid system:
 </p>
 
 # Json Structure for the conversion of the HA to HtPN
+The HA could be exported in a **JSON** format in order to make a conversion into other models. The Example provided is the description of the Thermostat HA shown above:
 ```json
 
 {
