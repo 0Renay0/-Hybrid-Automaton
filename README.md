@@ -1,6 +1,6 @@
 # Hybrid Automaton (HA)
 
-This project provides a modular framework to **model**, **simulate**, and **visualize** a hybrid automata. A hybrid automaton is a formalism that combines **continuous dynamics** and **discreate events**. In the article of T. A. Henzinger, **The theory of hybrid automata** [IEEE Transactions](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=561342) you can find all the exlpanation of the formalism of HA. 
+This project provides a modular framework to **model**, **simulate**, and **visualize** a hybrid automata. A hybrid automaton is a formalism that combines **continuous dynamics** and **discreate events**. In the article of T. A. Henzinger, [**The theory of hybrid automata**](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=561342) you can find all the exlpanation of the formalism of HA. This formalsim is used in several fields such as autonomous cars [**A Hybrid System Framework to Behavior Control of Nonholonomic AGV**](https://www.iaeng.org/publication/WCECS2011/WCECS2011_pp318-324.pdf) and in biology [**Hybrid Automata as a Unifying Framework for Modeling Excitable Cells**](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=4462715).
 
 
 ## Project structure
