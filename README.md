@@ -1,6 +1,7 @@
 # Hybrid Automaton (HA)
 
-This project provides a modular framework to **model**, **simulate**, and **visualize** a hybrid automata. A hybrid automaton is a formalism that combines **continuous dynamics** and **discreate events**.
+This project provides a modular framework to **model**, **simulate**, and **visualize** a hybrid automata. A hybrid automaton is a formalism that combines **continuous dynamics** and **discreate events**. In the article of T. A. Henzinger, **The theory of hybrid automata** [IEEE Transactions](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=561342) you can find all the exlpanation of the formalism of HA. 
+
 
 ## Project structure
   -  `HybridAutomaton.py` defines and builds the hybrid autoamton structure.
