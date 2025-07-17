@@ -1,6 +1,7 @@
 from graphviz import Digraph
 import re
 
+
 def visualiser_automate(A, filename="Hybrid_Automato", functions=None):
     """
     Visualise a hybrid automaton using Graphviz, including:
@@ -84,7 +85,7 @@ def visualiser_automate(A, filename="Hybrid_Automato", functions=None):
                     for i, v in enumerate(A["X"]):
                         guard_code = guard_code.replace(f"x[{i}]", v)
                     guard_code = guard_code.replace("A[\"E\"].get(\"", "").replace("\", False)", "")
-                    guard_code = guard_code.replace(" and ", " or ")
+                    guard_code = guard_code.replace(" and ", " and ")
                     guard_expr = guard_code
             except Exception:
                 guard_expr = guard_name + "(x)"
@@ -131,5 +132,5 @@ def visualiser_automate(A, filename="Hybrid_Automato", functions=None):
         dot.edge(src, dst, label=label)
 
     # Graph generation 
-    dot.render("MachineRep_Results/"+filename, format="png", cleanup=True)
+    dot.render("Thermostat_Results/"+filename, format="png", cleanup=True)
     print(f"Automaton Generated : {filename}.png")

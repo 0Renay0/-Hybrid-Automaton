@@ -2,11 +2,24 @@ import sys
 sys.path.append("Sources")       # Add the parent path to access modules
 from HybridAutomaton import (create_automate, define_continuous_space,add_discrete_state, # type: ignore
                              set_initial_state, set_flow, set_invariant,
-                             set_guard, set_jump, add_transition,
-                             collect_functions, export_automate_to_txt_with_functions,generate_config_from_automate)
+                             set_guard, set_jump, add_transition, export_automate_to_txt_with_functions,generate_config_from_automate)
 from Simulation import simulate, plot_trace # type: ignore
 from VisuelAutomate import visualiser_automate # type: ignore
 import inspect
+
+# === Generic function to extract function source code ===
+def collect_functions(*funcs):
+    """
+    It builds a dictionary of function names to source code strings.
+    Only includes callable functions.
+    """
+    function_names = [f.__name__ for f in funcs if callable(f)]
+    source_map = {}
+    all_items = list(globals().items())
+    for name, func in all_items:
+        if callable(func) and name in function_names:
+            source_map[name] = inspect.getsource(func)
+    return source_map
 
 # === Continuous Dynamics ===
 
