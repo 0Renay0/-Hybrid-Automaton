@@ -135,3 +135,38 @@ class TestHybridAutomaton(unittest.TestCase):
         with self.assertRaises(ValueError):
             set_flow(automaton,"Unkown",lambda x,u,t:[0.0])
         print("Test set flow with invalid state OK")
+        
+    
+    def test_set_invariant_valid(self):
+        automaton = create_automate()
+        add_discrete_state(automaton,"Q1")
+        
+        def Inv(x):
+            return x[0] <= 1.0
+        
+        set_invariant(automaton,"Q1",Inv)
+        self.assertIn("Q1",automaton["Inv"])
+        self.assertEqual(automaton["Inv"]["Q1"].__name__,"Inv")
+        print("Test set invariant OK")
+        
+    def test_set_jump_valid(self):
+        automaton = create_automate()
+        add_discrete_state(automaton,"Q1")
+        add_discrete_state(automaton,"Q2")
+        
+        def jump(x):
+            return x[0] >= 75.0
+        
+        set_jump(automaton,"Q1","Q2",jump)
+        self.assertIn("Q1",automaton["Jump"])
+        self.assertIn("Q2",automaton["Jump"]["Q1"])
+        self.assertEqual(automaton["Jump"]["Q1"]["Q2"].__name__,"jump")
+        print("Test set jump OK")
+        
+    
+    def test_set_jump_invalid_state(self):
+        automaton = create_automate()
+        add_discrete_state(automaton,"Q1")
+        with self.assertRaises(ValueError):
+            set_jump(automaton,"Q1","Q5", lambda x: x)
+        print("Test set jump with invalid state OK")
