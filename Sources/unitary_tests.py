@@ -30,4 +30,10 @@ class TestHybridAutomaton(unittest.TestCase):
         self.assertEqual(len(automaton["Q"]),1)
         print("Test add discreate state OK")
         
+    def test_define_continuous_space(self):
+        automaton = create_automate()
+        define_continuous_space(automaton,["X1","X2"])        
+        self.assertEqual(automaton["X"],["X1","X2"])
+        print("Test define continuous space OK")
+        
     
