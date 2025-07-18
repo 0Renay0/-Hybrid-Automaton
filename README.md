@@ -8,7 +8,7 @@ This project provides a modular framework to **model**, **simulate**, and **visu
   -  `Simulation.py` simulate the model of HA.
   -  `VisuelAutomate.py` generates the representation and the trace of simulation of HA.
 
-## Installation 
+## Installation
 Required packages:
 ```bash
 pip install graphviz matplotlib
@@ -28,7 +28,7 @@ pip install pandas
 ### Visualization (`VisuelAutomate.py`)
   - `visualiser_automate(A, filename, functions)` generates a `.png` diagram showing the representation of HA.
 
-## Output 
+## Output
 
 # HA representation
 Hybrid automata describing a thermostat:
@@ -114,6 +114,5 @@ The HA could be exported in a **JSON** format in order to make a conversion into
 ```
 
 
-## Author 
+## Author
 Developped by **HAMADI Rayen** as part of research and academic projects involving hybrid systems.
-

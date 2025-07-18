@@ -17,11 +17,11 @@ def visualiser_automate(A, filename="Hybrid_Automato", functions=None):
     label_u = f"U = {A['U']}" if A.get("U") else ""
     init_label = f"{label_vars}\n{label_u}".strip()
     dot.edge("init", A["q0"], label=init_label)
-    
+
     # Creation of nodes according to discreate states
     """
-    For each state q in Q, we extract the flow function. Then we try to extract the return 
-    value of the function in order to swap the state vectors by its labels. Once it's done, 
+    For each state q in Q, we extract the flow function. Then we try to extract the return
+    value of the function in order to swap the state vectors by its labels. Once it's done,
     we swap these informations in HTML table for each continuous variable.
     """
     for q in A["Q"]:
@@ -48,7 +48,7 @@ def visualiser_automate(A, filename="Hybrid_Automato", functions=None):
                     dx = flow_func([0.0] * len(A["X"]), 0.0)
                     for i, val in enumerate(dx):
                         label_lines.append(f"<TR><TD>{A['X'][i]}̇ = {val}</TD></TR>")
-                except:
+                except Exception:
                     for var in A["X"]:
                         label_lines.append(f"<TR><TD>{var}̇ = ?</TD></TR>")
         else:
@@ -56,11 +56,11 @@ def visualiser_automate(A, filename="Hybrid_Automato", functions=None):
                 dx = flow_func([0.0] * len(A["X"]), 0.0)
                 for i, val in enumerate(dx):
                     label_lines.append(f"<TR><TD>{A['X'][i]}̇ = {val}</TD></TR>")
-            except:
+            except Exception:
                 for var in A["X"]:
                     label_lines.append(f"<TR><TD>{var}̇ = ?</TD></TR>")
 
-        label = f"<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\">{''.join(label_lines)}</TABLE>>"
+        label = f'<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">{"".join(label_lines)}</TABLE>>'
         dot.node(q, label=label, shape="ellipse")
     """
     For each transition, we generate a label containing:
@@ -84,7 +84,9 @@ def visualiser_automate(A, filename="Hybrid_Automato", functions=None):
                     guard_code = body_match[0]
                     for i, v in enumerate(A["X"]):
                         guard_code = guard_code.replace(f"x[{i}]", v)
-                    guard_code = guard_code.replace("A[\"E\"].get(\"", "").replace("\", False)", "")
+                    guard_code = guard_code.replace('A["E"].get("', "").replace(
+                        '", False)', ""
+                    )
                     guard_code = guard_code.replace(" and ", " and ")
                     guard_expr = guard_code
             except Exception:
@@ -97,17 +99,23 @@ def visualiser_automate(A, filename="Hybrid_Automato", functions=None):
             parts.append(guard_expr)
         if event_name and event_name not in guard_expr:
             parts.append(event_name)
-            
+
         """
         For the reset functions if it's useful to be shown, we follow the same approach as transitions.
-        Otherwise, if we have no reset to do, you have to make exactly the same label as the following 
-        exemple: 
+        Otherwise, if we have no reset to do, you have to make exactly the same label as the following
+        exemple:
         def identity (x) : return x[:]
-        def reset_none(x): return x[:] 
+        def reset_none(x): return x[:]
         So we do not display these reset functions on the graph
         """
-        
-        if reset_name and functions and reset_name in functions and reset_name != "identity" and reset_name != "reset_none":
+
+        if (
+            reset_name
+            and functions
+            and reset_name in functions
+            and reset_name != "identity"
+            and reset_name != "reset_none"
+        ):
             try:
                 reset_code = functions[reset_name]
                 match = re.search(r"return\s*\[([^\]]+)\]", reset_code, re.DOTALL)
@@ -127,10 +135,9 @@ def visualiser_automate(A, filename="Hybrid_Automato", functions=None):
             except Exception:
                 parts.append(f"{reset_name}(x)")
 
-
         label = "[" + ", ".join(parts) + "]" if parts else ""
         dot.edge(src, dst, label=label)
 
-    # Graph generation 
-    dot.render("Thermostat_Results/"+filename, format="png", cleanup=True)
+    # Graph generation
+    dot.render("Thermostat_Results/" + filename, format="png", cleanup=True)
     print(f"Automaton Generated : {filename}.png")
