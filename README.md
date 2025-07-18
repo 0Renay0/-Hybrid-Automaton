@@ -113,6 +113,40 @@ The HA could be exported in a **JSON** format in order to make a conversion into
 
 ```
 
+## Unit Tests
+
+To ensure robustness and correctness, the project includes a suite of **unit tests** targeting the main functionalities of the hybrid automaton module.
+
+### Test Coverage:
+
+- The creation of an empty automaton.
+- Addition of discrete states and continuous variables.
+- Correct assignment of flow functions, guards, and jumps.
+- Exporting to JSON structure.
+
+The tests are located in the file:
+```bash
+Sources/unitary_tests.py
+```
+
+To run the tests:
+```bash
+python -m unittest tests/test_automaton.py
+```
+
+Example of output:
+```bash
+..
+Test creation automaton OK
+Test add discrete state OK
+Test define continuous space OK
+Test set initial state OK
+...
+----------------------------------------------------------------------
+Ran n tests in 0.024s
+
+OK
+```
 
 ## Author
 Developped by **HAMADI Rayen** as part of research and academic projects involving hybrid systems.
