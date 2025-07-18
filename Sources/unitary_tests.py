@@ -170,3 +170,54 @@ class TestHybridAutomaton(unittest.TestCase):
         with self.assertRaises(ValueError):
             set_jump(automaton,"Q1","Q5", lambda x: x)
         print("Test set jump with invalid state OK")
+        
+        
+
+class TestExport(unittest.TestCase):
+    
+    def test_export_automate_to_txt(self):
+        # Automaton Creation 
+        automaton = create_automate()
+        add_discrete_state(automaton,"Q1")
+        add_discrete_state(automaton,"Q2")
+        define_continuous_space(automaton,["x"])
+        set_initial_state(automaton,"Q1",[0.0])
+        
+        # Dynamic functions
+        def flow(x,u,t): return [1.0]
+        def inv(x): return x[0] <= 15
+        def jump(x): return [0.0]
+
+        set_flow(automaton,"Q1",flow)
+        set_invariant(automaton,"Q1",inv)
+        set_jump(automaton,"Q1","Q2",jump)
+        
+        # Dict of functions 
+        functions = {
+            "flow": "def flow(x,u,t): return [1.0]",
+            "inv" : "def inv(x): return x[0] <= 15",
+            "jump": "def jump(x): return [0.0]"
+        }
+
+        # Creation of temporary file 
+        with tempfile.NamedTemporaryFile(delete=False,suffix=".txt") as tmpfile:
+            export_automate_to_txt_with_functions(automaton, tmpfile.name, functions)
+            
+        with open(tmpfile.name, "r") as f:
+            data = json.load(f)
+            
+        # Verification of the contenent of the file
+        self.assertIn("Q",data)
+        self.assertIn("flow",data)
+        self.assertEqual(data["flow"]["Q1"], "flow")
+        self.assertEqual(data["Inv"]["Q1"], "inv")
+        self.assertEqual(data["Jump"]["Q1"]["Q2"], "jump")
+        self.assertIn("functions",data)
+        self.assertIn("flow",data["functions"])        
+        self.assertIn("inv",data["functions"])
+        self.assertIn("jump",data["functions"])
+        
+        print("Test exportation structure OK")
+        
+        #Removing file 
+        os.remove(tmpfile.name)
