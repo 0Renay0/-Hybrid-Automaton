@@ -79,3 +79,32 @@ class TestHybridAutomaton(unittest.TestCase):
         with self.assertRaises(ValueError):
             set_event(automaton,"Q1","Q2","event_invalid")
         print("Test set invalid event OK")
+        
+        
+    def test_add_transition_basic(self):
+        automaton = create_automate()
+        add_discrete_state(automaton,"Q1")
+        add_discrete_state(automaton,"Q2")
+        add_transition(automaton,"Q1","Q2")
+        self.assertEqual(len(automaton["T"]),1)
+        t = automaton["T"][0]
+        self.assertEqual(t["q_from"],"Q1")
+        self.assertEqual(t["q_to"],"Q2")
+        self.assertIsNone(t["event"])
+        self.assertIsNone(t["guard"])
+        self.assertIsNone(t["reset"])
+        print("Test add basic transition OK")
+        
+    def test_add_transition_completed(self):
+        automaton = create_automate()
+        add_discrete_state(automaton,"Q1")
+        add_discrete_state(automaton,"Q2")
+        add_transition(automaton,"Q1","Q2",event="alpha",guard="G_func",reset="R_func")
+        t = automaton["T"][0]
+        self.assertEqual(t["q_from"],"Q1")
+        self.assertEqual(t["q_to"],"Q2")
+        self.assertEqual(t["event"],"alpha")
+        self.assertEqual(t["guard"],"G_func")
+        self.assertEqual(t["reset"],"R_func")
+        print("Test add complete transition OK")
+        
