@@ -131,7 +131,7 @@ Sources/unitary_tests.py
 
 To run the tests:
 ```bash
-python -m unittest tests/test_automaton.py
+python -m unittest Sources/unitary_tests.py
 ```
 
 Example of output:
