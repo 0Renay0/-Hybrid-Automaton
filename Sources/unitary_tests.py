@@ -7,11 +7,6 @@ import os
 class TestHybridAutomaton(unittest.TestCase):
     
     def test_create_automate(self):
-        """
-        Initializes the structure of a hybrid automaton.
-        Returns:
-            dict: Empty initialized automaton structure.
-        """
         automaton = create_automate()
         self.assertIsInstance(automaton,dict)
         self.assertEqual(automaton["Q"],[])
@@ -26,3 +21,13 @@ class TestHybridAutomaton(unittest.TestCase):
         self.assertEqual(automaton["Guard"],{})
         self.assertEqual(automaton["Jump"],{})
         print("Test creation automaton OK")
+        
+    def test_add_discreate_state(self):
+        automaton = create_automate()
+        add_discrete_state(automaton,"IDLE")
+        self.assertIn("IDLE", automaton["Q"])
+        add_discrete_state(automaton,"IDLE") # No duplicate allowed
+        self.assertEqual(len(automaton["Q"]),1)
+        print("Test add discreate state OK")
+        
+    
