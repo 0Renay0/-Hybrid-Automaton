@@ -60,3 +60,22 @@ class TestHybridAutomaton(unittest.TestCase):
         with self.assertRaises(ValueError):
             set_initial_state(automaton,"Q1",[0.0]) # len(x0) = 2 not 1 so Error
         print("Test set invalid initial continuous state OK")
+        
+    def test_set_event_valid(self):
+        automaton = create_automate()
+        add_discrete_state(automaton,"Q1")
+        add_discrete_state(automaton,"Q2")
+        set_event(automaton,"Q1","Q2","alpha")
+        self.assertIn("Event",automaton)
+        self.assertIn("Q1",automaton["Event"])
+        self.assertIn("Q2",automaton["Event"]["Q1"])
+        # self.assertIn("alpha",automaton)
+        self.assertEqual(automaton["Event"]["Q1"]["Q2"],"alpha")
+        print("Test set valid event OK")
+        
+    def test_set_event_invalid_state(self):
+        automaton = create_automate()
+        add_discrete_state(automaton,"Q1")
+        with self.assertRaises(ValueError):
+            set_event(automaton,"Q1","Q2","event_invalid")
+        print("Test set invalid event OK")
