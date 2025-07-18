@@ -36,4 +36,27 @@ class TestHybridAutomaton(unittest.TestCase):
         self.assertEqual(automaton["X"],["X1","X2"])
         print("Test define continuous space OK")
         
-    
+    def test_set_initial_state_success(self):
+        automaton = create_automate()
+        add_discrete_state(automaton,"Q1")
+        define_continuous_space(automaton,["x1"])
+        set_initial_state(automaton,"Q1",[0.0])
+        self.assertEqual(automaton["q0"],"Q1")
+        self.assertEqual(automaton["x0"],[0.0])
+        print("Test set initial state OK")
+        
+    def test_set_initial_state_invalid_state(self):
+        automaton = create_automate()
+        # add_discrete_state(automaton,"Q1")
+        define_continuous_space(automaton,["x1"])
+        with self.assertRaises(ValueError):
+            set_initial_state(automaton,"UNKNOWN",[0.0])
+        print("Test set invalid initial discreate state OK")
+        
+    def test_set_initial_state_invalid_x0(self):
+        automaton = create_automate()
+        add_discrete_state(automaton,"Q1")
+        define_continuous_space(automaton,["x1","x2"])
+        with self.assertRaises(ValueError):
+            set_initial_state(automaton,"Q1",[0.0]) # len(x0) = 2 not 1 so Error
+        print("Test set invalid initial continuous state OK")
