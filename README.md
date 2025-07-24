@@ -131,7 +131,7 @@ Sources/unitary_tests.py
 
 To run the tests:
 ```bash
-python -m unittest Sources/unitary_tests.py
+python3 -m unittest unitary_tests.py
 ```
 
 Example of output:
@@ -143,7 +143,7 @@ Test define continuous space OK
 Test set initial state OK
 ...
 ----------------------------------------------------------------------
-Ran n tests in 0.024s
+Ran n tests in 0.010s
 
 OK
 ```
